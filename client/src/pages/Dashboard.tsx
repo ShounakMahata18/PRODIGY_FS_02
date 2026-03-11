@@ -147,33 +147,33 @@ export default function Dashboard() {
                     >
                         <input
                             name="name"
-                            className="border rounded px-3 py-2 flex-1 min-w-[140px]"
+                            className="border rounded px-3 py-2 flex-1 `min-w-[140px]`"
                             placeholder="Name"
                         />
 
                         <input
                             name="email"
                             type="email"
-                            className="border rounded px-3 py-2 flex-1 min-w-[180px]"
+                            className="border rounded px-3 py-2 flex-1 `min-w-[180px]`"
                             placeholder="Email"
                         />
 
                         <input
                             name="position"
-                            className="border rounded px-3 py-2 flex-1 min-w-[140px]"
+                            className="border rounded px-3 py-2 flex-1 `min-w-[140px]`"
                             placeholder="Position"
                         />
 
                         <input
                             name="department"
-                            className="border rounded px-3 py-2 flex-1 min-w-[140px]"
+                            className="border rounded px-3 py-2 flex-1 `min-w-[140px]`"
                             placeholder="Department"
                         />
 
                         <input
                             name="salary"
                             type="number"
-                            className="border rounded px-3 py-2 flex-1 min-w-[120px]"
+                            className="border rounded px-3 py-2 flex-1 `min-w-[120px]`"
                             placeholder="Salary"
                         />
 
@@ -190,7 +190,7 @@ export default function Dashboard() {
                         All Employees
                     </h2>
 
-                    <div className="max-h-[400px] overflow-y-auto border rounded-lg">
+                    <div className="`max-h-[400px]` overflow-y-auto border rounded-lg">
                         <table className="w-full text-left">
                             <thead className="bg-gray-200 sticky top-0">
                                 <tr>
@@ -245,7 +245,7 @@ export default function Dashboard() {
 
             {isModalOpen && editingEmployee && (
                 <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
-                    <div className="bg-white p-6 rounded-lg shadow-lg w-[400px]">
+                    <div className="bg-white p-6 rounded-lg shadow-lg `w-[400px]`">
                         <h2 className="text-lg font-semibold mb-4 text-center">
                             Update Employee
                         </h2>
