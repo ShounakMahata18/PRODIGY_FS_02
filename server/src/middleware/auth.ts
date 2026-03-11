@@ -1,4 +1,4 @@
-import {Request, Response, NextFunction} from 'express';
+import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
 // interface for authenticated request
@@ -7,16 +7,20 @@ export interface AuthRequest extends Request {
 }
 
 // middleware to authenticate JWT token
-export const authenticate = (req: AuthRequest, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization?.split(' ')[1];
+export const authenticate = (
+    req: AuthRequest,
+    res: Response,
+    next: NextFunction,
+) => {
+    const token = req.headers.authorization?.split(" ")[1];
 
-    if(!token) return res.status(401).json({message: 'No token provided'});
+    if (!token) return res.status(401).json({ message: "No token provided" });
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET!);
         req.user = decoded;
         next();
     } catch (err) {
-        return res.status(403).json({message: 'Invalid token'});
+        return res.status(403).json({ message: "Invalid token" });
     }
-}
+};

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -16,7 +17,9 @@ export default function Register() {
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const API_URL = import.meta.env.VITE_REACT_APP_BACKEND_URL || "http://localhost:5000";
+        const API_URL =
+            import.meta.env.VITE_REACT_APP_BACKEND_URL ||
+            "http://localhost:5000";
 
         if (!name || !email || !password || !confirmPassword) {
             alert("All fields are required!");
@@ -50,94 +53,97 @@ export default function Register() {
 
             alert("Registration successful!");
             navigate("/login");
-
         } catch (error: any) {
             console.error("Registration error:", error);
             alert("Registration failed: " + error.message);
-
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="w-full min-h-screen flex items-center justify-center">
-            <form
-                onSubmit={handleRegister}
-                className="flex flex-col w-sm p-6 rounded-lg border"
-            >
-                <h2 className="text-2xl text-center">Register</h2>
-                <input
-                    className="border w-full mt-4 px-3 py-1 rounded-full"
-                    type="text"
-                    placeholder="Full Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-                <input
-                    className="border w-full mt-2 px-3 py-1 rounded-full"
-                    placeholder="Email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <div className="relative mt-2">
+        <div className="w-full h-screen flex flex-col">
+            <Navbar />
+            <div className="flex-1 flex flex-col items-center justify-center">
+                <form
+                    onSubmit={handleRegister}
+                    className="flex flex-col w-sm p-6 rounded-lg border"
+                >
+                    <h2 className="text-2xl text-center">Register</h2>
                     <input
-                        className="border w-full px-3 py-1 rounded-full"
-                        placeholder="Password"
-                        type={showPassword ? "text" : "password"}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        className="border w-full mt-4 px-3 py-1 rounded-full"
+                        type="text"
+                        placeholder="Full Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         required
                     />
-                    <button
-                        className="absolute inset-y-0 right-2 flex items-center text-gray-600 hover:text-gray-950"
-                        type="button"
-                        onClick={() => setShowPassword((prev) => !prev)}
-                    >
-                        {showPassword ? (
-                            <Eye size={18} />
-                        ) : (
-                            <EyeOff size={18} />
-                        )}
-                    </button>
-                </div>
-                <div className="relative mt-2">
                     <input
-                        className="border w-full px-3 py-1 rounded-full"
-                        placeholder="Confirm Password"
-                        type={showConfirmPassword ? "text" : "password"}
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="border w-full mt-2 px-3 py-1 rounded-full"
+                        placeholder="Email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                    <button
-                        className="absolute inset-y-0 right-2 flex items-center text-gray-600 hover:text-gray-950"
-                        type="button"
-                        onClick={() => setShowConfirmPassword((prev) => !prev)}
-                    >
-                        {showConfirmPassword ? (
-                            <Eye size={18} />
-                        ) : (
-                            <EyeOff size={18} />
-                        )}
+                    <div className="relative mt-2">
+                        <input
+                            className="border w-full px-3 py-1 rounded-full"
+                            placeholder="Password"
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <button
+                            className="absolute inset-y-0 right-2 flex items-center text-gray-600 hover:text-gray-950"
+                            type="button"
+                            onClick={() => setShowPassword((prev) => !prev)}
+                        >
+                            {showPassword ? (
+                                <Eye size={18} />
+                            ) : (
+                                <EyeOff size={18} />
+                            )}
+                        </button>
+                    </div>
+                    <div className="relative mt-2">
+                        <input
+                            className="border w-full px-3 py-1 rounded-full"
+                            placeholder="Confirm Password"
+                            type={showConfirmPassword ? "text" : "password"}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                        />
+                        <button
+                            className="absolute inset-y-0 right-2 flex items-center text-gray-600 hover:text-gray-950"
+                            type="button"
+                            onClick={() =>
+                                setShowConfirmPassword((prev) => !prev)
+                            }
+                        >
+                            {showConfirmPassword ? (
+                                <Eye size={18} />
+                            ) : (
+                                <EyeOff size={18} />
+                            )}
+                        </button>
+                    </div>
+                    <button className="text-white bg-black h-9 mt-4 rounded-full cursor-pointer">
+                        {loading ? "Registering..." : "Register"}
                     </button>
-                </div>
-                <button className="text-white bg-black h-9 mt-4 rounded-full cursor-pointer">
-                    {loading ? "Registering..." : "Register"}
-                </button>
-                <div className="flex justify-between mt-4">
-                    <span>Already have an account?</span>
-                    <span
-                        className="underline text-blue-700"
-                        onClick={() => navigate("/login")}
-                    >
-                        Login
-                    </span>
-                </div>
-            </form>
+                    <div className="flex justify-between mt-4">
+                        <span>Already have an account?</span>
+                        <span
+                            className="underline text-blue-700"
+                            onClick={() => navigate("/login")}
+                        >
+                            Login
+                        </span>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }
